@@ -337,22 +337,25 @@
   </div>
 
   <script>
-    // Proteção de acesso: se não estiver logado, manda de volta pro login
-    // e já indica o retorno para esta página depois de autenticar.
-    if (sessionStorage.getItem('lamec_logged_in') !== 'true') {
-      window.location.href = 'login.html?redirect=agenda.html';
-    }
-
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      sessionStorage.removeItem('lamec_logged_in');
-      window.location.href = 'index.html';
-    });
-
     // Conexão com o Supabase (URL do projeto + chave anon public).
     // A chave anon é feita para ficar exposta no front-end, não é secreta.
     const SUPABASE_URL = 'https://yohexasnrxgieanhtkga.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvaGV4YXNucnhnaWVhbmh0a2dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwMDMxMjQsImV4cCI6MjEwNDU3OTEyNH0.SR6yDP2LIOzee6CXEP6O-cRHG1NVrxr4Qdje4GSp3Bc';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    (async () => {
+      // Proteção de acesso: checa se existe uma sessão real do Supabase Auth.
+      // Se não tiver, manda de volta pro login com o redirecionamento certo.
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      if (!session) {
+        window.location.href = 'login.html?redirect=agenda.html';
+      }
+    })();
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await supabaseClient.auth.signOut();
+      window.location.href = 'index.html';
+    });
 
     const MESES = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
 
@@ -419,7 +422,7 @@
       loadEvents();
     }
 
-    // Controle do modal de novo evento
+    // Controle do modal de novo evento 1
     const overlay = document.getElementById('modalOverlay');
     document.getElementById('openModalBtn').addEventListener('click', () => overlay.classList.add('open'));
     document.getElementById('cancelModalBtn').addEventListener('click', () => overlay.classList.remove('open'));

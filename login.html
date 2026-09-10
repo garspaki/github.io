@@ -6,8 +6,9 @@
 <title>LAMeC — Entrar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-  :root {
+    :root {
     --bg: #3C7D91;
     --bg-glow: #4C8EA6;
     --panel-white: #ffffff;
@@ -223,8 +224,8 @@
 
     <form id="loginForm">
       <div class="field-group">
-        <label class="field-label" for="login">Login</label>
-        <input class="field" type="text" id="login" name="login" placeholder="Digite seu login" autocomplete="username">
+        <label class="field-label" for="login">E-mail</label>
+        <input class="field" type="email" id="login" name="login" placeholder="Digite seu e-mail" autocomplete="username">
       </div>
 
       <div class="field-group">
@@ -248,26 +249,38 @@
       document.getElementById('authWarning').classList.add('show');
     }
 
-    // ATENÇÃO: isso é só para TESTE em desenvolvimento.
-    // O login e a senha ficam visíveis no código-fonte da página,
-    // então isso NÃO deve ser usado quando o site for para produção.
-    const VALID_LOGIN = 'admin';
-    const VALID_SENHA = '1234';
+    // Conexão com o Supabase (mesma URL e chave anon usadas na agenda).
+    const SUPABASE_URL = 'https://yohexasnrxgieanhtkga.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvaGV4YXNucnhnaWVhbmh0a2dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwMDMxMjQsImV4cCI6MjEwNDU3OTEyNH0.SR6yDP2LIOzee6CXEP6O-cRHG1NVrxr4Qdje4GSp3Bc';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const loginValue = document.getElementById('login').value.trim();
-      const senhaValue = document.getElementById('senha').value;
+      const email = document.getElementById('login').value.trim();
+      const senha = document.getElementById('senha').value;
       const errorMsg = document.getElementById('authError');
+      const submitBtn = e.target.querySelector('.confirm-btn');
 
-      if (loginValue === VALID_LOGIN && senhaValue === VALID_SENHA) {
-        errorMsg.classList.remove('show');
-        sessionStorage.setItem('lamec_logged_in', 'true');
-        window.location.href = redirectTo || 'index.html';
-      } else {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Entrando...';
+
+      const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password: senha
+      });
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Confirmar';
+
+      if (error) {
+        errorMsg.textContent = 'E-mail ou senha incorretos.';
         errorMsg.classList.add('show');
+        return;
       }
+
+      errorMsg.classList.remove('show');
+      window.location.href = redirectTo || 'index.html';
     });
   </script>
 
