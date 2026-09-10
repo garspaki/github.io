@@ -170,7 +170,36 @@
     .wordmark { font-size: 44px; }
     header { padding: 18px 20px; }
   }
+
+  /* Ícone flutuante do Instagram */
+  .insta-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    z-index: 40;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .insta-float:hover {
+    transform: scale(1.08);
+    filter: brightness(1.05);
+  }
+
+  .insta-float svg {
+    width: 26px;
+    height: 26px;
+    stroke: #0b1420;
+  }
 </style>
+
 </head>
 <body>
 
@@ -193,7 +222,7 @@
     <h1 class="wordmark">LA<span>Me</span>C</h1>
     <p class="tagline">Conhecimento que chega à comunidade</p>
   </main>
-
+  
   <script>
     const toggle = document.getElementById('menuToggle');
     const panel = document.getElementById('menuPanel');
@@ -209,6 +238,10 @@
       toggle.setAttribute('aria-expanded', 'false');
     });
   </script>
+  
+    <a class="insta-float" href="https://www.instagram.com/lamec.unex" target="_blank" rel="noopener" aria-label="Instagram da LAMeC">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+  </a>
 
 </body>
 </html>
