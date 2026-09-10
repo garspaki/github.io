@@ -1,11 +1,320 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAMeC - Apresentação</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAMeC — Quem Somos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12141c;
+    --bg-glow: #1a1d2b;
+    --accent: #6ee7d8;
+    --accent-soft: rgba(110, 231, 216, 0.08);
+    --text-primary: #f5f6fa;
+    --text-muted: #a7abbd;
+    --border: #2a2e3d;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Formas decorativas de fundo */
+  .decor {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .decor-1 {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    left: -140px;
+    background: radial-gradient(circle, rgba(110, 231, 216, 0.16), transparent 70%);
+  }
+
+  .decor-2 {
+    width: 500px;
+    height: 500px;
+    bottom: -200px;
+    right: -180px;
+    background: radial-gradient(circle, rgba(110, 231, 216, 0.10), transparent 70%);
+  }
+
+  .decor-3 {
+    width: 260px;
+    height: 260px;
+    top: 40%;
+    right: 8%;
+    background: radial-gradient(circle, rgba(110, 231, 216, 0.06), transparent 70%);
+  }
+
+  header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 32px;
+  }
+
+  .wordmark-small {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+  }
+
+  .wordmark-small span {
+    color: var(--accent);
+  }
+
+  .back-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .back-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid rgba(110, 231, 216, 0.25);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 40px;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-underline {
+    width: 64px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  .lead {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text-primary);
+    margin: 40px 0 48px 0;
+  }
+
+  .lead::first-letter {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--accent);
+    float: left;
+    line-height: 0.8;
+    margin: 8px 10px 0 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .value-card {
+    background: #1b1e29;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .value-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent);
+    opacity: 0.7;
+  }
+
+  .value-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .value-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent);
+  }
+
+  .value-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+  }
+
+  .value-text {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .closing-quote {
+    text-align: center;
+    margin-top: 56px;
+    padding: 40px 32px;
+    background: linear-gradient(180deg, rgba(110, 231, 216, 0.08), transparent);
+    border: 1px solid rgba(110, 231, 216, 0.2);
+    border-radius: 18px;
+    position: relative;
+  }
+
+  .closing-quote svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .closing-quote p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  .closing-quote p span {
+    color: var(--accent);
+  }
+
+  @media (max-width: 720px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+    h1 { font-size: 32px; }
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 18px 20px; }
+    .back-link span.label { display: none; }
+  }
+</style>
 </head>
 <body>
-    
+
+  <div class="decor decor-1"></div>
+  <div class="decor decor-2"></div>
+  <div class="decor decor-3"></div>
+
+  <header>
+    <div class="wordmark-small">LA<span>Me</span>C</div>
+    <a class="back-link" href="index.html">← <span class="label">Início</span></a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">Quem Somos</span>
+      <h1>Medicina além das paredes</h1>
+      <div class="hero-underline"></div>
+    </div>
+
+    <p class="lead">
+      A Liga Acadêmica de Medicina Comunitária (LAMeC) é uma iniciativa acadêmica voltada à integração entre ensino, pesquisa e extensão, buscando ampliar a compreensão dos estudantes sobre a relação entre saúde, sociedade e os diferentes determinantes que influenciam a qualidade de vida da população.
+    </p>
+
+    <div class="card-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3-8-6-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5-4 8-8 11z"/></svg>
+        </div>
+        <h3 class="value-title">Nosso propósito</h3>
+        <p class="value-text">Aproximar a medicina da comunidade, promovendo educação em saúde, prevenção de doenças e cuidado, com atenção especial às populações em situação de vulnerabilidade social e econômica.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.9 4.9l2.8 2.8"/><path d="M16.3 16.3l2.8 2.8"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.9 19.1l2.8-2.8"/><path d="M16.3 7.7l2.8-2.8"/></svg>
+        </div>
+        <h3 class="value-title">Nossa crença</h3>
+        <p class="value-text">A formação médica vai além do conhecimento técnico. Compreender a realidade social e reconhecer as barreiras de acesso à saúde são fundamentais para uma medicina mais humana e equitativa.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="value-title">Como atuamos</h3>
+        <p class="value-text">Por meio de atividades científicas, projetos de extensão e ações comunitárias, contribuímos tanto para a formação de futuros profissionais quanto para o elo entre universidade, saúde e comunidade.</p>
+      </div>
+    </div>
+
+    <div class="closing-quote">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;margin-right:auto;display:block;"><path d="M3 21c3-1 6-3 6-7V9a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2c0 2-1 3.5-3 4z"/><path d="M14 21c3-1 6-3 6-7V9a2 2 0 0 0-2-2h-3a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2c0 2-1 3.5-3 4z"/></svg>
+      <p>LAMeC: <span>medicina além das paredes.</span></p>
+    </div>
+  </main>
+
 </body>
 </html>
