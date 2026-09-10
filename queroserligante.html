@@ -1,11 +1,234 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAMeC - ligantes </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAMeC — Quero Ser Ligante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12141c;
+    --bg-glow: #1a1d2b;
+    --accent: #6ee7d8;
+    --accent-soft: rgba(110, 231, 216, 0.08);
+    --text-primary: #f5f6fa;
+    --text-muted: #a7abbd;
+    --border: #2a2e3d;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: radial-gradient(circle at 50% 15%, var(--bg-glow) 0%, var(--bg) 55%);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 32px;
+  }
+
+  .wordmark-small {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+  }
+
+  .wordmark-small span {
+    color: var(--accent);
+  }
+
+  .back-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .back-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid rgba(110, 231, 216, 0.25);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px;
+    margin: 0 0 12px 0;
+  }
+
+  .hero p {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .option-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .option-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #1b1e29;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 28px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: border-color 0.25s ease, transform 0.2s ease, background 0.25s ease;
+  }
+
+  .option-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    background: #1e2230;
+  }
+
+  .option-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .option-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--accent);
+  }
+
+  .option-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    line-height: 1.35;
+  }
+
+  .option-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+  }
+
+  .option-cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .option-card:hover .option-cta {
+    gap: 10px;
+  }
+
+  .option-cta svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--accent);
+    transition: transform 0.2s ease;
+  }
+
+  @media (max-width: 640px) {
+    .option-grid {
+      grid-template-columns: 1fr;
+    }
+    h1 { font-size: 28px; }
+  }
+</style>
 </head>
 <body>
-    
+
+  <header>
+    <div class="wordmark-small">LA<span>Me</span>C</div>
+    <a class="back-link" href="/">← <span>Início</span></a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">Processo Seletivo</span>
+      <h1>Quero Ser Ligante</h1>
+      <p>Faça parte da LAMeC. Confira o edital do processo seletivo e envie seu projeto para o PROSEL.</p>
+    </div>
+
+    <div class="option-grid">
+      <a class="option-card" href="https://drive.google.com/file/d/11WL0QUouCsU5A2PdGWCKbmssSuSjdT-6/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+        <div class="option-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3 class="option-title">Leia aqui o edital do processo seletivo 2026.2</h3>
+        <p class="option-desc">Confira os requisitos, cronograma e todas as informações oficiais do processo seletivo.</p>
+        <span class="option-cta">Acessar edital
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <a class="option-card" href="#" target="_blank" rel="noopener">
+        <div class="option-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </div>
+        <h3 class="option-title">Envie aqui o seu projeto para o PROSEL</h3>
+        <p class="option-desc">Submeta seu projeto de pesquisa ou extensão para avaliação da comissão do PROSEL.</p>
+        <span class="option-cta">Enviar projeto
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+    </div>
+  </main>
+
 </body>
 </html>
