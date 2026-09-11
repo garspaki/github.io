@@ -230,7 +230,9 @@
 
       <div class="field-group">
         <label class="field-label" for="senha">Senha</label>
-        <input class="field" type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password">
+        <div style="position: relative;">
+        <input class="field" type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="button" id="toggleSenha" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 13px; color: #8a8fa3;">Mostrar</button>
       </div>
 
       <button class="confirm-btn" type="submit">Confirmar</button>
@@ -253,12 +255,19 @@
     const SUPABASE_URL = 'https://yohexasnrxgieanhtkga.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvaGV4YXNucnhnaWVhbmh0a2dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwMDMxMjQsImV4cCI6MjEwNDU3OTEyNH0.SR6yDP2LIOzee6CXEP6O-cRHG1NVrxr4Qdje4GSp3Bc';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+   
+    document.getElementById('toggleSenha').addEventListener('click', function() {
+     const campo = document.getElementById('senha');
+     const isPassword = campo.type === 'password';
+     campo.type = isPassword ? 'text' : 'password';
+     this.textContent = isPassword ? 'Ocultar' : 'Mostrar';
+     });
+  
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const email = document.getElementById('login').value.trim();
-      const senha = document.getElementById('senha').value;
+      const senha = document.getElementById('senha').value.normalize('NFC');
       const errorMsg = document.getElementById('authError');
       const submitBtn = e.target.querySelector('.confirm-btn');
 
