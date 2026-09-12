@@ -304,8 +304,8 @@
   </header>
 
   <main>
-    <h1 class="wordmark">LA<span>Me</span>C</h1>
-    <p class="tagline">Conhecimento que chega à comunidade</p>
+   <h1 class="wordmark">LA<span>Me</span>C</h1>
+   <p class="tagline">Conhecimento que chega à comunidade</p>
   </main>
   
   <script>
@@ -341,18 +341,24 @@
   // deletar apos prosel
 
   <script>
-    // Popup de convite ao processo seletivo, aparece ao abrir o site
-    const proselOverlay = document.getElementById('proselOverlay');
-    setTimeout(() => proselOverlay.classList.add('open'), 400);
+   // Popup de convite ao processo seletivo, aparece só 1x por visita
+   const proselOverlay = document.getElementById('proselOverlay');
+
+   if (!sessionStorage.getItem('prosel_popup_visto')) {
+     setTimeout(() => {
+       proselOverlay.classList.add('open');
+       sessionStorage.setItem('prosel_popup_visto', 'true');
+      }, 1000);
+    }
 
     document.getElementById('proselClose').addEventListener('click', () => {
-      proselOverlay.classList.remove('open');
+     proselOverlay.classList.remove('open');
     });
 
     proselOverlay.addEventListener('click', (e) => {
       if (e.target === proselOverlay) proselOverlay.classList.remove('open');
     });
   </script>
-  // deletar script apos prosel
+ // deletar script apos prosel
 </body>
 </html>
