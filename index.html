@@ -327,26 +327,6 @@
       panel.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
     });
-
-   // Aviso de processo seletivo encerrado ao clicar em "Quero ser um ligante" no menu
-    const encerradoOverlay = document.getElementById('encerradoOverlay');
-    const linkQuerSerLigante = document.querySelector('a[href="queroserligante.html"]');
-
-    if (linkQuerSerLigante) {
-      linkQuerSerLigante.addEventListener('click', (e) => {
-        e.preventDefault();
-        encerradoOverlay.classList.add('open');
-      });
-    }
-
-    document.getElementById('encerradoClose').addEventListener('click', () => {
-      encerradoOverlay.classList.remove('open');
-    });
-
-    encerradoOverlay.addEventListener('click', (e) => {
-      if (e.target === encerradoOverlay) encerradoOverlay.classList.remove('open');
-    });
-    // Aviso de processo seletivo encerrado ao clicar em "Quero ser um ligante" no menu
   </script>
   
   <a class="insta-float" href="https://www.instagram.com/lamec.unex" target="_blank" rel="noopener noreferrer" aria-label="Instagram da LAMeC">
@@ -366,6 +346,29 @@
     </div>
   </div>
   <!--processo seletivo encerrado-->
+
+ <script>
+       // Aviso de processo seletivo encerrado ao clicar em "Quero ser um ligante" no menu
+    const encerradoOverlay = document.getElementById('encerradoOverlay');
+    const linkQuerSerLigante = document.querySelector('a[href="queroserligante.html"]');
+
+    if (linkQuerSerLigante) {
+      linkQuerSerLigante.addEventListener('click', (e) => {
+        e.preventDefault();
+        encerradoOverlay.classList.add('open');
+      });
+    }
+
+    document.getElementById('encerradoClose').addEventListener('click', () => {
+      encerradoOverlay.classList.remove('open');
+    });
+
+    encerradoOverlay.addEventListener('click', (e) => {
+      if (e.target === encerradoOverlay) encerradoOverlay.classList.remove('open');
+    });
+    // Aviso de processo seletivo encerrado ao clicar em "Quero ser um ligante" no menu
+ </script>
+
 </body>
 
 </html>

@@ -1,11 +1,408 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAMeC — Membros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12141c;
+    --bg-glow: #1a1d2b;
+    --accent: #6ee7d8;
+    --accent-soft: rgba(110, 231, 216, 0.08);
+    --text-primary: #f5f6fa;
+    --text-muted: #a7abbd;
+    --border: #2a2e3d;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: radial-gradient(circle at 50% 10%, var(--bg-glow) 0%, var(--bg) 55%);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 32px;
+  }
+
+  .wordmark-small {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+  }
+
+  .wordmark-small span { color: var(--accent); }
+
+  .back-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .back-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 24px 100px;
+  }
+
+  .section-title {
+    text-align: center;
+    margin: 64px 0 32px;
+  }
+
+  .section-title:first-of-type { margin-top: 24px; }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid rgba(110, 231, 216, 0.25);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+
+  .section-title h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    margin: 0;
+  }
+
+  /* Card do professor orientador (destaque, fora do carrossel) */
+  .professor-card {
+    max-width: 420px;
+    margin: 0 auto;
+    background: #1b1e29;
+    border: 1px solid rgba(110, 231, 216, 0.25);
+    border-radius: 18px;
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .professor-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent);
+  }
+
+  .avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 2px solid rgba(110, 231, 216, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+
+  .avatar svg { width: 38px; height: 38px; stroke: var(--accent); }
+
+  .professor-card .person-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+  }
+
+  .professor-card .person-role {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+  }
+
+  .professor-card .person-detail {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Carrossel */
+  .carousel {
+    position: relative;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .carousel-track-wrap {
+    overflow: hidden;
+    border-radius: 18px;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.35s ease;
+  }
+
+  .member-card {
+    flex: 0 0 100%;
+    background: #1b1e29;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 36px 28px;
+    text-align: center;
+  }
+
+  .member-card .avatar { width: 72px; height: 72px; }
+  .member-card .avatar svg { width: 32px; height: 32px; }
+
+  .member-card .person-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+  }
+
+  .member-card .person-role {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+  }
+
+  .member-card .person-detail {
+    color: var(--text-muted);
+    font-size: 12.5px;
+    margin: 0;
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #1b1e29;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    z-index: 2;
+  }
+
+  .carousel-arrow:hover { border-color: var(--accent); color: var(--accent); }
+  .carousel-arrow.prev { left: -50px; }
+  .carousel-arrow.next { right: -50px; }
+  .carousel-arrow svg { width: 18px; height: 18px; stroke: currentColor; }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 18px;
+  }
+
+  .carousel-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .carousel-dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+
+  @media (max-width: 520px) {
+    .carousel { max-width: 280px; }
+    .carousel-arrow.prev { left: 4px; }
+    .carousel-arrow.next { right: 4px; }
+    .carousel-arrow { background: rgba(27, 30, 41, 0.85); }
+  }
+</style>
 </head>
 <body>
-    
+
+  <header>
+    <div class="wordmark-small">LA<span>Me</span>C</div>
+    <a class="back-link" href="/">← <span>Início</span></a>
+  </header>
+
+  <main>
+
+    <!-- Professor orientador -->
+    <div class="section-title">
+      <span class="eyebrow">Orientação</span>
+      <h2>Professor Orientador</h2>
+    </div>
+
+    <div class="professor-card" id="professorCard"></div>
+
+    <!-- Diretoria -->
+    <div class="section-title">
+      <span class="eyebrow">Diretoria</span>
+      <h2>Membros da Diretoria</h2>
+    </div>
+
+    <div class="carousel" id="diretoriaCarousel">
+      <button class="carousel-arrow prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="diretoriaTrack"></div>
+      </div>
+      <button class="carousel-arrow next" aria-label="Próximo">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="carousel-dots" id="diretoriaDots"></div>
+    </div>
+
+    <!-- Ligantes -->
+    <div class="section-title">
+      <span class="eyebrow">Time</span>
+      <h2>Ligantes</h2>
+    </div>
+
+    <div class="carousel" id="ligantesCarousel">
+      <button class="carousel-arrow prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="ligantesTrack"></div>
+      </div>
+      <button class="carousel-arrow next" aria-label="Próximo">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="carousel-dots" id="ligantesDots"></div>
+    </div>
+
+  </main>
+
+  <script>
+    // ======= DADOS =======
+    // Edite essas listas para adicionar, remover ou alterar pessoas.
+    // Não precisa mexer em nenhuma outra parte do código.
+
+    const professor = {
+      nome: "Tarciso de Figueiredo Palma",
+      formacoes: "Graduação em Ciências Biológicas — FAVENI · Doutorado em Programa de Pós-Graduação em Saúde Coletiva - UEFS · Mestrado em Saúde, Ambiente e Trabalho — UFBA"
+    };
+
+    const diretoria = [
+      { nome: "Bernardo Ducas", cargo: "Presidente", semestre: "6º semestre" },
+      { nome: "Kaylane Cardoso", cargo: "Vice-Presidente", semestre: "6º semestre" },
+      { nome: "Isabella Moraes", cargo: "Secretária", semestre: "5º semestre" },
+      { nome: "Camila Mendonça", cargo: "Tesoureira", semestre: "6º semestre" },
+      { nome: "Gustavo Urbano", cargo: "Diretor de Extensão", semestre: "6º semestre" },
+      { nome: "Moyara Mescias", cargo: "Diretora Acadêmica", semestre: "6º semestre" },
+      { nome: "Felipe Cardoso", cargo: "Diretor de Markenting", semestre: "5º semestre" }
+    ];
+
+    const ligantes = [
+      { nome: "Iolanda Oliveira", semestre: "2º semestre" },
+      { nome: "Jamille Nayara", semestre: "6º semestre" },
+      { nome: "Joana Emília", semestre: "4º semestre" },
+      { nome: "Lívia Assis", semestre: "7º semestre" },
+      { nome: "Maria Clara Pires", semestre: "5º semestre" },
+      { nome: "Melissa Oliveira", semestre: "3º semestre" }
+    ];
+
+    // ======= RENDERIZAÇÃO =======
+    const personIcon = `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+
+    document.getElementById('professorCard').innerHTML = `
+      <div class="avatar">${personIcon}</div>
+      <p class="person-name">${professor.nome}</p>
+      <p class="person-role">Professor Orientador</p>
+      <p class="person-detail">${professor.formacoes}</p>
+    `;
+
+    function buildCarousel({ trackId, dotsId, arrowsParentId, data, roleLabel }) {
+      const track = document.getElementById(trackId);
+      const dotsWrap = document.getElementById(dotsId);
+      const parent = document.getElementById(arrowsParentId);
+      let current = 0;
+
+      track.innerHTML = data.map((p) => `
+        <div class="member-card">
+          <div class="avatar">${personIcon}</div>
+          <p class="person-name">${p.nome}</p>
+          <p class="person-role">${p.cargo || roleLabel}</p>
+          <p class="person-detail">Cursando ${p.semestre}</p>
+        </div>
+      `).join('');
+
+      dotsWrap.innerHTML = data.map((_, i) => `<span class="carousel-dot" data-i="${i}"></span>`).join('');
+      const dots = dotsWrap.querySelectorAll('.carousel-dot');
+
+      function update() {
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      parent.querySelector('.prev').addEventListener('click', () => {
+        current = (current - 1 + data.length) % data.length;
+        update();
+      });
+
+      parent.querySelector('.next').addEventListener('click', () => {
+        current = (current + 1) % data.length;
+        update();
+      });
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          current = parseInt(dot.dataset.i, 10);
+          update();
+        });
+      });
+
+      update();
+    }
+
+    buildCarousel({
+      trackId: 'diretoriaTrack',
+      dotsId: 'diretoriaDots',
+      arrowsParentId: 'diretoriaCarousel',
+      data: diretoria,
+      roleLabel: ''
+    });
+
+    buildCarousel({
+      trackId: 'ligantesTrack',
+      dotsId: 'ligantesDots',
+      arrowsParentId: 'ligantesCarousel',
+      data: ligantes,
+      roleLabel: 'Ligante'
+    });
+  </script>
+
 </body>
 </html>
